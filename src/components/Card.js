@@ -8,23 +8,20 @@ const ItemTypes = {
 
 const Card = ({ id, text, position, onMove }) => {
   const [{ isDragging }, drag] = useDrag({
-    item: id,
     type: ItemTypes.CARD,
+    item: { id, type: ItemTypes.CARD },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     }),
-    // end: (item, monitor) => {
-    //   const dropResult = monitor.getDropResult();
-    //   if (item && dropResult) {
-    //     const { left, top } = dropResult;
-    //     onMove(item, left, top);
-    //   }
-    // },
   });
+
   return (
     <div
       ref={drag}
       style={{
+        border: "2px solid black",
+        borderRadius: "5px",
+        padding: "10px",
         position: "absolute",
         left: position.x,
         top: position.y,
